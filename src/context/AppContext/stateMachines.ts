@@ -27,6 +27,7 @@ export const toggleMachine = createMachine<ToggleContext, ToggleEvents>({
 interface InterfaceContext {
   message: string;
   amount: number;
+  area: string;
 }
 
 type InterfaceEvents = {
@@ -45,7 +46,7 @@ export const interfaceListenerMachine = createMachine<
 >({
   id: "ReactUnityMessageListener",
   initial: "ListenForMessage",
-  context: { message: "default", amount: 0 },
+  context: { message: "default", amount: 0, area: "spawn" },
   states: {
     ParseMessage: {
       entry: assign({
@@ -54,9 +55,13 @@ export const interfaceListenerMachine = createMachine<
           return event?.context?.message || "updated";
         },
         amount: (context, event) => {
-            console.log("assign amount - context: ", context, "event", event);
-            return event?.context?.count || 0;
-          },
+          console.log("assign amount - context: ", context, "event", event);
+          return parseInt(event?.context?.amount) || 0;
+        },
+        area: (context, event) => {
+          console.log("assign amount - context: ", context, "event", event);
+          return event?.context?.area || "spawn";
+        },
       }),
       on: {
         UpdateHealth: {

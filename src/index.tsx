@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./AppRouter";
 import AppContext from "./context/AppContext";
+import UnityContext from "context/UnityContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -12,7 +13,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <AppContext>
-      <RouterProvider router={router} />
+      <UnityContext>
+        <RouterProvider router={router} />
+      </UnityContext>
     </AppContext>
   </React.StrictMode>
 );

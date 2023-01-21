@@ -31,28 +31,40 @@ const ApplicationProvider: React.FC<Props> = ({ children }) => {
   const [state, setState] = useState(false);
 
   //stats
-  const [healthPoints, setHealthPoints] = useState(100);
-  const [ammoCount, setAmmoCount] = useState(20);
-  const [experiencePoints, setExperiencePoints] = useState("Spawn");
-  const [location, setLocation] = useState(0);
+  const [healthPoints, setHealthPoints] = useState<number>(100);
+  const [ammoCount, setAmmoCount] = useState<number>(20);
+  const [location, setLocation] = useState<string>("Spawn");
+  const [experiencePoints, setExperiencePoints] = useState<number>(0);
 
   const [currentToggleState, sendToggleState] = useMachine(toggleMachine);
   const [currentListenerState, sendListenerState] = useMachine(
     interfaceListenerMachine
   );
-  const { message, amount } = currentListenerState.context;
+  const { message, amount, area } = currentListenerState.context;
 
   useEffect(() => {
     console.log("values updated!", message, amount);
     switch (message) {
       case "hp":
         setHealthPoints((p) => p + amount);
-        console.log("Adjusting HP by ", amount);
+        sendListenerState({ type: "UpdateHealth", context: 0 });
+        break;
+      case "ammo":
+        setAmmoCount((p) => p + amount);
+        sendListenerState({ type: "UpdateAmmo", context: 0 });
+        break;
+      case "loc":
+        setLocation(area);
+        sendListenerState({ type: "UpdateLocation", context: 0 });
+        break;
+      case "exp":
+        setExperiencePoints((p) => p + amount);
+        sendListenerState({ type: "UpdateExperience", context: 0 });
         break;
       default:
         break;
     }
-  }, [message, amount]);
+  }, [message, amount, area, sendListenerState]);
 
   return (
     <AppCtx.Provider
