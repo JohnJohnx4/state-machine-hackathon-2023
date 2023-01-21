@@ -3,10 +3,12 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 
+import BasePage from 'pages/BasePage'
+
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello world!</div>,
+    element: <BasePage />,
   },
 ]);
 
