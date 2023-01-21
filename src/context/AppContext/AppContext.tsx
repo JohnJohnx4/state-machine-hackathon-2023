@@ -1,14 +1,3 @@
-////////////////////////////////////////////////////////////////
-//! Application Context
-//
-//* This context will be used to control the message system
-//*   to communicate between the bottom and top layers, the
-//*   actions required to enable this communication, and any
-//*   other controlled values to display to the user Ex:
-//*   points, leaderboards, catalogs, etc
-//*
-//
-////////////////////////////////////////////////////////////////
 import { useMachine } from "@xstate/react";
 import React, {
   useState,
@@ -43,7 +32,6 @@ const ApplicationProvider: React.FC<Props> = ({ children }) => {
   const { message, amount, area } = currentListenerState.context;
 
   useEffect(() => {
-    console.log("values updated!", message, amount);
     switch (message) {
       case "hp":
         setHealthPoints((p) => p + amount);
