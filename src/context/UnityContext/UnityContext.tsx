@@ -68,8 +68,7 @@ const UnityStateProvider: React.FC<{ children: React.ReactNode }> = ({
     },
   });
 
-  const { setAmmoCount, setHealthPoints, setLocation, setExperiencePoints } =
-    useApp();
+  const { sendListenerState } = useApp();
 
   const handleGUIUpdate = (_parsedData: {
     platform: string;
@@ -79,16 +78,32 @@ const UnityStateProvider: React.FC<{ children: React.ReactNode }> = ({
     // {"platform":"unity","type":"ammo_count","message":"28"}
     switch (_parsedData.type) {
       case "health_adjust":
-        setHealthPoints(parseInt(_parsedData.message));
+        // setHealthPoints(parseInt(_parsedData.message));
+        sendListenerState({
+          type: "EventMessageRecieved",
+          context: { message: "hp", amount: parseInt(_parsedData.message) },
+        });
         break;
       case "ammo_count":
-        setAmmoCount(parseInt(_parsedData.message));
+        // setAmmoCount(parseInt(_parsedData.message));
+        sendListenerState({
+          type: "EventMessageRecieved",
+          context: { message: "ammo", amount: parseInt(_parsedData.message) },
+        });
         break;
       case "location_update":
-        setLocation(_parsedData.message);
+        // setLocation(_parsedData.message);
+        sendListenerState({
+          type: "EventMessageRecieved",
+          context: { message: "loc", area: _parsedData.message },
+        });
         break;
       case "experience_adjust":
-        setExperiencePoints(parseInt(_parsedData.message));
+        // setExperiencePoints(parseInt(_parsedData.message));
+        sendListenerState({
+          type: "EventMessageRecieved",
+          context: { message: "exp", amount: parseInt(_parsedData.message) },
+        });
         break;
       default:
         break;

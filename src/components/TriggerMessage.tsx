@@ -63,17 +63,17 @@ const TriggerMessage = () => {
   return (
     <div>
       <h1>TriggerMessage</h1>
-      <input name="health" value={inputState.health} onChange={handleInput} />
+      <input style={{width: "120px", height: "32px"}} name="health" value={inputState.health} onChange={handleInput} />
       <button style={tempStyles} onClick={() => triggerHealthMessage()}>
         TriggerHealthMessage
       </button>
       <br />
-      <input name="ammo" value={inputState.ammo} onChange={handleInput} />
+      <input style={{width: "120px", height: "32px"}} name="ammo" value={inputState.ammo} onChange={handleInput} />
       <button style={tempStyles} onClick={() => triggerAmmoMessage()}>
         TriggerAmmoMessage
       </button>
       <br />
-      <input
+      <input style={{width: "120px", height: "32px"}}
         name="location"
         value={inputState.location}
         onChange={handleInput}
@@ -82,7 +82,7 @@ const TriggerMessage = () => {
         TriggerLocationMessage
       </button>
       <br />
-      <input name="exp" value={inputState.exp} onChange={handleInput} />
+      <input style={{width: "120px", height: "32px"}} name="exp" value={inputState.exp} onChange={handleInput} />
       <button style={tempStyles} onClick={() => triggerExperienceMessage()}>
         TriggerExperienceMessage
       </button>

@@ -38,7 +38,7 @@ const ApplicationProvider: React.FC<Props> = ({ children }) => {
         sendListenerState({ type: "UpdateHealth", context: 0 });
         break;
       case "ammo":
-        setAmmoCount((p) => p + amount);
+        setAmmoCount(amount);
         sendListenerState({ type: "UpdateAmmo", context: 0 });
         break;
       case "loc":
